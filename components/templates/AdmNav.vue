@@ -54,7 +54,7 @@
 
     <v-content>
       <v-container
-        class="fill-height"
+        class=""
         fluid
       >
         <nuxt />
@@ -114,6 +114,11 @@ export default {
           icon: 'mdi-chart-bubble',
           title: 'Restaurante',
           to: '/adm/restaurante'
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Reserva',
+          to: '/adm/reserva'
         }
       ],
       right: true,
