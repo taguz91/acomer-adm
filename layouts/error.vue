@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <h1 v-if="error.statusCode === 404">
       {{ pageNotFound }}
     </h1>
@@ -39,6 +39,11 @@ export default {
 
 <style scoped>
 h1 {
-  font-size: 20px;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.text-big {
+  font-size: 2.5rem;
+  padding: 15px 0 15px 0;
 }
 </style>

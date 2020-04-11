@@ -1,8 +1,11 @@
 <template>
   <div>
+
+    <h1 class="mt-2 mb-3">Productos</h1>
+
     <v-data-table
       :headers="headers"
-      :items="reservas"
+      :items="items"
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
       hide-default-footer
@@ -16,6 +19,16 @@
           label="Buscador:"
           class="mx-4 mt-2 pt-2"
         ></v-text-field>
+      </template>
+
+      <template v-slot:item.actions="{ item }" >
+        <v-icon
+          small
+          class="mx-auto"
+          @click="showMore(item)"
+        >
+          mdi-eye
+        </v-icon>
       </template>
     
     </v-data-table>
@@ -50,28 +63,28 @@
         sortDesc: false,
         loading: false,
         headers: [
-          {
-            text: 'Fecha Reserva',
+          { text: 'Restaurante', value: 'nombre_restaurante' },
+          { text: 'Nombre', value: 'nombre', },
+          { text: 'Stock', value: 'stock' },
+          { text: 'Precio', value: 'precio' },
+          { 
+            text: 'Acciones', 
+            value: 'actions', 
+            sortable: false,
             align: 'center',
-            value: 'fecha_reserva',
           },
-          { text: '# Personas', value: 'numero_personas' },
-          { text: 'Total', value: 'total' },
-          { text: 'Nombre', value: 'nombre' },
-          { text: 'Identificacion', value: 'identificacion' },
-          { text: 'Telefono', value: 'telefono' },
         ],
-        reservas: [],
+        items: [],
       }
     },
     asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/reserva')
+      return axios.get('http://localhost:8000/api/v1/producto')
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
           return {
             pageCount: data.meta.last_page,
-            reservas: data.data
+            items: data.data
           }
         }
       })
@@ -80,14 +93,14 @@
       });
     },
     methods: {
-      next: function (page) {
+      next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get('http://localhost:8000/api/v1/reserva?page=' + page)
+          axios.get('http://localhost:8000/api/v1/producto?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {
-              this.reservas = data.data
+              this.items = data.data
             }
             this.loading = false;
           })
@@ -96,9 +109,10 @@
             console.log(e);
           });
           this.lastLoad = page;
-        } else {
-          console.log('YA CARGAMOS!!!'); 
         }
+      },
+      showMore(item) {
+        console.log(item);
       }
     }
   }

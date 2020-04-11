@@ -28,7 +28,7 @@
                     to="/inspire"
                     v-on="on"
                   >
-                    <v-icon>mdi-codepen</v-icon>
+                    <v-icon>mdi-close-circle</v-icon>
                   </nuxt-link>
                 </template>
                 <span>Home</span>
