@@ -1,19 +1,18 @@
 <template>
-  <v-felx 
-    xs12
-  >
+  <div>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="reservas"
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
       hide-default-footer
       class="elevation-1"
+      :loading="loading"
+      loading-text="Loading... Please wait"
     >
 
       <template v-slot:top>
         <v-text-field
-          
           label="Buscador:"
           class="mx-4 mt-2 pt-2"
         ></v-text-field>
@@ -26,127 +25,82 @@
       class="mt-4 ml-auto" 
     >
       <v-pagination 
+        :disabled="loading"
+        value="page"
         v-model="page"
+        color="accent"
         :length="pageCount"
+        @input="next"
       />
     </v-flex>
 
-  </v-felx>
+  </div>
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     data () {
       return {
         page: 1,
-        pageCount: 100,
-        sortBy: 'fat',
+        lastLoad: 1,
+        pageCount: 37,
+        sortBy: 'fecha_reserva',
         sortDesc: false,
+        loading: false,
         headers: [
           {
-            text: 'Dessert (100g serving)',
-            align: 'start',
-            value: 'name',
+            text: 'Fecha Reserva',
+            align: 'center',
+            value: 'fecha_reserva',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { text: '# Personas', value: 'numero_personas' },
+          { text: 'Total', value: 'total' },
+          { text: 'Nombre', value: 'nombre' },
+          { text: 'Identificacion', value: 'identificacion' },
+          { text: 'Telefono', value: 'telefono' },
         ],
-        desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%',
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%',
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%',
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%',
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%',
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%',
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%',
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%',
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%',
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%',
-          },
-        ],
+        reservas: [],
       }
     },
-    methods: {
-      toggleOrder () {
-        this.sortDesc = !this.sortDesc
-      },
-      nextSort () {
-        let index = this.headers.findIndex(h => h.value === this.sortBy)
-        index = (index + 1) % this.headers.length
-        this.sortBy = this.headers[index].value
-      },
+    asyncData({params, error}) {
+      return axios.get('http://localhost:8000/api/v1/reserva')
+      .then((res) => {
+        let data = res.data;
+        if (data.status < 400) {
+          return {
+            pageCount: data.meta.last_page,
+            reservas: data.data
+          }
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     },
+    methods: {
+      next: function (page) {
+        if (this.lastLoad != page) {
+          this.loading = true;
+          axios.get('http://localhost:8000/api/v1/reserva?page=' + page)
+          .then((res) => {
+            let data = res.data;
+            if (data.status < 400) {
+              this.reservas = data.data
+            }
+            this.loading = false;
+          })
+          .catch((e) => {
+            this.loading = false;
+            console.log(e);
+          });
+          this.lastLoad = page;
+        } else {
+          console.log('YA CARGAMOS!!!'); 
+        }
+      }
+    }
   }
+
 </script>
