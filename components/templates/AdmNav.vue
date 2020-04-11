@@ -195,22 +195,32 @@ export default {
             {
               icon: 'mdi-pasta',
               title: 'Restaurantes',
-              to: '/adm/restaurantes'
+              to: '/adm/usuarios/restaurantes'
             },
             {
               icon: 'mdi-folder-account',
               title: 'Empleados',
-              to: '/adm/empleados'
+              to: '/adm/usuarios/empleados'
             },
             {
               icon: 'mdi-smart-card',
               title: 'Clientes',
-              to: '/adm/clientes'
+              to: '/adm/usuarios/clientes'
+            },
+            {
+              icon: 'mdi-comment-account',
+              title: 'Sugerencias',
+              to: '/adm/clientes/sugerencias'
             },
             {
               icon: 'mdi-account-tie',
               title: 'Administradores',
               to: '/adm/administradores'
+            },
+            {
+              icon: 'mdi-account-details',
+              title: 'Historial',
+              to: '/adm/usuarios/historial'
             },
           ]
         }
