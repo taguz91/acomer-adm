@@ -53,7 +53,7 @@
       :clipped-left=true
       fixed
       app
-      color="primary"
+      color="accent"
     >
       <v-app-bar-nav-icon 
         color="white"
@@ -89,7 +89,7 @@
     <v-footer
       :fixed="fixed"
       app
-      color="primary"
+      color="accent"
     >
       <span class="white--text">&copy; ZeroTeam {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -120,127 +120,95 @@ export default {
             {
               icon: 'mdi-account-box',
               title: 'Perfil',
-              to: '/restaurante'
+              to: '/perfil'
             },
           ]
         },
+
         {
           categoria: 'Restaurante',
           items: [
             {
               icon: 'mdi-noodles',
               title: 'Sucursales',
-              to: '/adm/sucursales'
-            },
-            {
-              icon: 'mdi-tag',
-              title: 'Categorias',
-              to: '/adm/categorias'
-            },
-            {
-              icon: 'mdi-silverware',
-              title: 'Platos',
-              to: '/adm/platos'
-            },
-            {
-              icon: 'mdi-food-fork-drink',
-              title: 'Combos',
-              to: '/adm/combos'
-            },
-            {
-              icon: 'mdi-cards-outline',
-              title: 'Menus',
-              to: '/adm/menus'
-            },
-            {
-              icon: 'mdi-dishwasher',
-              title: 'Menus dia',
-              to: '/adm/menus/dia'
-            },
-            {
-              icon: 'mdi-cookie',
-              title: 'Productos',
-              to: '/adm/productos'
+              to: '/restaurante/sucursales'
             },
             {
               icon: 'mdi-table-chair',
               title: 'Mesas',
-              to: '/adm/mesas'
+              to: '/restaurante/mesas'
             },
             {
-              icon: 'mdi-star',
-              title: 'Calificaciones',
-              to: '/adm/calificaciones'
+              icon: 'mdi-cookie',
+              title: 'Productos',
+              to: '/restaurante/productos'
             },
           ]
         },
+
+        {
+          categoria: 'Menus',
+          items: [
+            {
+              icon: 'mdi-cards-outline',
+              title: 'Menus',
+              to: '/restaurante/menus'
+            },
+            {
+              icon: 'mdi-dishwasher',
+              title: 'Menus dia',
+              to: '/restaurante/menus/dia'
+            },
+            {
+              icon: 'mdi-silverware',
+              title: 'Platos',
+              to: '/restaurante/menus/platos'
+            },
+            {
+              icon: 'mdi-food-fork-drink',
+              title: 'Combos',
+              to: '/restaurante/menus/combos'
+            },
+          ]
+        },
+
         {
           categoria: 'Administracion',
           items: [
             {
+              icon: 'mdi-folder-account',
+              title: 'Empleados',
+              to: '/restaurante/administracion/empleados'
+            },
+            {
               icon: 'mdi-note',
               title: 'Pedidos',
-              to: '/adm/pedidos'
+              to: '/restaurante/administracion/pedidos'
             },
             {
               icon: 'mdi-cash-usd-outline',
               title: 'Ventas',
-              to: '/adm/ventas'
+              to: '/restaurante/administracion/ventas'
             },
             {
               icon: 'mdi-alarm',
               title: 'Reservas',
-              to: '/adm/reservas'
+              to: '/restaurante/administracion/reservas'
             },
             {
               icon: 'mdi-percent',
               title: 'Promociones',
-              to: '/adm/promociones'
+              to: '/restaurante/administracion/promociones'
             },
             {
               icon: 'mdi-printer',
               title: 'Reportes',
-              to: '/adm/reportes'
-            },
-          ]
-        },
-        {
-          categoria: 'Usuarios',
-          items: [
-            {
-              icon: 'mdi-account',
-              title: 'Usuarios',
-              to: '/adm/usuarios'
+              to: '/restaurante/administracion/reportes'
             },
             {
-              icon: 'mdi-pasta',
-              title: 'Restaurantes',
-              to: '/adm/restaurantes'
-            },
-            {
-              icon: 'mdi-folder-account',
-              title: 'Empleados',
-              to: '/adm/usuarios/empleados'
-            },
-            {
-              icon: 'mdi-smart-card',
-              title: 'Clientes',
-              to: '/adm/usuarios/clientes'
-            },
-            {
-              icon: 'mdi-comment-account',
-              title: 'Sugerencias',
-              to: '/adm/clientes/sugerencias'
-            },
-            {
-              icon: 'mdi-account-tie',
-              title: 'Administradores',
-              to: '/adm/administradores'
-            },
-            {
-              icon: 'mdi-account-details',
-              title: 'Historial',
-              to: '/adm/usuarios/historial'
+              icon: 'mdi-cash',
+              title: 'Ventas',
+              to: '/restaurante/administracion/ventas'
             },
           ]
         }
@@ -249,7 +217,7 @@ export default {
         
       ],
       right: true,
-      title: 'Acomer - Administracion'
+      title: 'Acomer - Restaurante'
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1 class="mt-2 mb-3">Restaurantes</h1>
+    <h1 class="mt-2 mb-3">Reportes</h1>
 
     <v-data-table
       :headers="headers"
@@ -59,17 +59,14 @@
         page: 1,
         lastLoad: 1,
         pageCount: 37,
-        sortBy: 'inicio_suscripcion',
+        sortBy: 'fecha',
         sortDesc: false,
         loading: false,
         headers: [
-          { text: 'Nombre comercial', value: 'nombre_comercial' },
-          { text: 'Nombre fiscal', value: 'nombre_fiscal', },
-          { text: 'Fecha inicio suscripcion', value: 'inicio_suscripcion' },
-          { text: 'Fecha ultimo pago', value: 'ultimo_pago' },
-          { text: 'Fecha proximo pago', value: 'fecha_proximo_pago' },
-          { text: 'Usuario', value: 'username' },
-          { text: 'Correo', value: 'correo' },
+          { text: 'Reporte', value: 'reporte' },
+          { text: 'Fecha Reporte', value: 'fecha', },
+          { text: 'Nombre', value: 'nombre' },
+          { text: 'Nombre Restaurante', value: 'nombre_restaurante'},
           { 
             text: 'Acciones', 
             value: 'actions', 
@@ -81,7 +78,7 @@
       }
     },
     asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/restaurante')
+      return axios.get('http://localhost:8000/api/v1/reporte')
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
@@ -99,7 +96,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get('http://localhost:8000/api/v1/restaurante?page=' + page)
+          axios.get('http://localhost:8000/api/v1/reporte?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {
