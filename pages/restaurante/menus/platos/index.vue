@@ -54,6 +54,7 @@
   import axios from 'axios';
 
   export default {
+    layout: 'menu-rest',
     data () {
       return {
         page: 1,
