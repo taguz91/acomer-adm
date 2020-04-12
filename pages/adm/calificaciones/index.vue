@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1 class="mt-2 mb-3">Menu Dia</h1>
+    <h1 class="mt-2 mb-3">Calificaciones</h1>
 
     <v-data-table
       :headers="headers"
@@ -63,10 +63,12 @@
         sortDesc: false,
         loading: false,
         headers: [
-          { text: 'Menu Dia', value: 'menu_dia' },
-          { text: 'Fecha Inicio', value: 'fecha_inicio', },
-          { text: 'Fecha Fin', value: 'fecha_fin' },
-          { text: 'Nombre Restaurante', value: 'nombre_restaurante'},
+          { text: 'Calificacion', value: 'calificacion' },
+          { text: 'Tipo Calificacion', value: 'tipo_calificacion', },
+          { text: 'Nombre', value: 'nombre' },
+          { text: 'Apellido', value: 'apellido'},
+          { text: 'Identificacion', value: 'identificacion'},
+          { text: 'Telefono', value: 'telefono'},
           { 
             text: 'Acciones', 
             value: 'actions', 
@@ -78,7 +80,7 @@
       }
     },
     asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/menudia')
+      return axios.get('http://localhost:8000/api/v1/calificacion')
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
@@ -96,7 +98,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get('http://localhost:8000/api/v1/menudia?page=' + page)
+          axios.get('http://localhost:8000/api/v1/calificacion?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {
@@ -118,4 +120,3 @@
   }
 
 </script>
-
