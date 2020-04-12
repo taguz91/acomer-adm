@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1 class="mt-2 mb-3">Platos</h1>
+    <h1 class="mt-2 mb-3">Sucursales</h1>
 
     <v-data-table
       :headers="headers"
@@ -63,9 +63,9 @@
         sortDesc: false,
         loading: false,
         headers: [
-          { text: 'Nombre', value: 'nombre' },
-          { text: 'Precio', value: 'precio' },
-          { text: 'Ingredientes', value: 'ingredientes' },
+          { text: 'Horario Atención', value: 'horario_atencion' },
+          { text: 'Número', value: 'numero' },
+          { text: 'Dirección', value: 'direccion'},
           { text: 'Nombre Restaurante', value: 'nombre_restaurante'},
           { 
             text: 'Acciones', 
@@ -78,7 +78,7 @@
       }
     },
     asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/plato')
+      return axios.get('http://localhost:8000/api/v1/sucursal')
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
@@ -96,7 +96,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get('http://localhost:8000/api/v1/plato?page=' + page)
+          axios.get('http://localhost:8000/api/v1/sucursal?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {

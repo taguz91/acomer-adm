@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1 class="mt-2 mb-3">Platos</h1>
+    <h1 class="mt-2 mb-3">Ventas</h1>
 
     <v-data-table
       :headers="headers"
@@ -64,9 +64,14 @@
         loading: false,
         headers: [
           { text: 'Nombre', value: 'nombre' },
-          { text: 'Precio', value: 'precio' },
-          { text: 'Ingredientes', value: 'ingredientes' },
+          { text: 'Apellido', value: 'apellido'},
+          { text: 'Direccion', value: 'direccion' },
+          { text: 'Telefono', value: 'telefono' },
+          { text: 'Identificacion', value: 'identificacion'},
+          { text: 'Fecha', value: 'fecha'},
           { text: 'Nombre Restaurante', value: 'nombre_restaurante'},
+          { text: 'Platos', value: 'platos'},
+          { text: 'Total', value: 'total'},
           { 
             text: 'Acciones', 
             value: 'actions', 
@@ -78,7 +83,7 @@
       }
     },
     asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/plato')
+      return axios.get('http://localhost:8000/api/v1/encabezado/factura')
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
@@ -96,7 +101,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get('http://localhost:8000/api/v1/plato?page=' + page)
+          axios.get('http://localhost:8000/api/v1/encabezado/factura?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {
