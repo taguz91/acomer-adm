@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1 class="mt-2 mb-3">Historial usuarios</h1>
+    <h1 class="mt-2 mb-3">Platos</h1>
 
     <v-data-table
       :headers="headers"
@@ -66,7 +66,6 @@
         headers: [
           { text: 'Nombre', value: 'nombre' },
           { text: 'Precio', value: 'precio', },
-          { text: 'Accion', value: 'accion' },
           { 
             text: 'Acciones', 
             value: 'actions', 
