@@ -195,7 +195,7 @@ export default {
             {
               icon: 'mdi-pasta',
               title: 'Restaurantes',
-              to: '/adm/usuarios/restaurantes'
+              to: '/adm/restaurantes'
             },
             {
               icon: 'mdi-folder-account',
