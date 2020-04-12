@@ -53,7 +53,7 @@
       :clipped-left=true
       fixed
       app
-      color="primary"
+      color="accent"
     >
       <v-app-bar-nav-icon 
         color="white"
@@ -89,7 +89,7 @@
     <v-footer
       :fixed="fixed"
       app
-      color="primary"
+      color="accent"
     >
       <span class="white--text">&copy; ZeroTeam {{ new Date().getFullYear() }}</span>
     </v-footer>
