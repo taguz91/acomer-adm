@@ -128,6 +128,11 @@ export default {
           categoria: 'Restaurante',
           items: [
             {
+              icon: 'mdi-noodles',
+              title: 'Sucursales',
+              to: '/adm/sucursales'
+            },
+            {
               icon: 'mdi-tag',
               title: 'Categorias',
               to: '/adm/categorias'
@@ -148,6 +153,11 @@ export default {
               to: '/adm/menus'
             },
             {
+              icon: 'mdi-dishwasher',
+              title: 'Menus dia',
+              to: '/adm/menus/dia'
+            },
+            {
               icon: 'mdi-cookie',
               title: 'Productos',
               to: '/adm/productos'
@@ -156,6 +166,11 @@ export default {
               icon: 'mdi-table-chair',
               title: 'Mesas',
               to: '/adm/mesas'
+            },
+            {
+              icon: 'mdi-star',
+              title: 'Calificaciones',
+              to: '/adm/calificaciones'
             },
           ]
         },
@@ -181,6 +196,11 @@ export default {
               icon: 'mdi-percent',
               title: 'Promociones',
               to: '/adm/promociones'
+            },
+            {
+              icon: 'mdi-printer',
+              title: 'Reportes',
+              to: '/adm/reportes'
             },
           ]
         },
