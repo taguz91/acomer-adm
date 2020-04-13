@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1 class="mt-2 mb-3">Menu Dia</h1>
+    <h1 class="mt-2 mb-3">Empleados</h1>
 
     <v-data-table
       :headers="headers"
@@ -30,6 +30,10 @@
           mdi-eye
         </v-icon>
       </template>
+
+      <template v-slot:item.full_name="{ item }"> 
+        {{ item.nombre }} {{ item.apellido }}
+      </template>
     
     </v-data-table>
 
@@ -54,20 +58,18 @@
   import axios from 'axios';
 
   export default {
-    layout: 'menu-rest',
     data () {
       return {
         page: 1,
         lastLoad: 1,
         pageCount: 37,
-        sortBy: '',
+        sortBy: 'fecha_reserva',
         sortDesc: false,
         loading: false,
         headers: [
-          { text: 'Menu Dia', value: 'menu_dia' },
-          { text: 'Precio', value: 'precio', },
-          { text: 'Descripcion', value: 'descripcion', },
-          { text: 'Accion', value: 'accion' },
+          { text: 'Nombre', value: 'full_name' },
+          { text: 'Identificacion', value: 'identificacion', },
+          { text: 'Nombre Resturante', value: 'nombre_restaurante' },
           { 
             text: 'Acciones', 
             value: 'actions', 
@@ -79,7 +81,7 @@
       }
     },
     asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/menudia/restaurante/8')
+      return axios.get('http://localhost:8000/api/v1/empleado')
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
@@ -97,7 +99,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get('http://localhost:8000/api/v1/menudia/restaurante/8?page=' + page)
+          axios.get('http://localhost:8000/api/v1/empleado?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {
