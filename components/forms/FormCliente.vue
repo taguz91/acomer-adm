@@ -1,5 +1,8 @@
 <template>
   <v-form>
+
+    <v-card-title class="headline">Formulario cliente:</v-card-title>
+
     <v-container>
 
       <v-row>
@@ -7,8 +10,6 @@
           cols="12"
           md=""
         >
-
-        <h1>Formulario cliente:</h1>
 
         </v-col>
       </v-row>
