@@ -9,7 +9,8 @@
 <script>
 import FormEmpleado from '~/components/forms/FormEmpleado.vue';
 
-export default{
+export default {
+    middleware: 'auth-adm',
     components: {
         FormEmpleado
     }

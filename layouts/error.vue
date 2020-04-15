@@ -6,30 +6,49 @@
     <h1 v-else>
       {{ otherError }}
     </h1>
+
+    <h2>
+      {{ message }}
+    </h2>
     <NuxtLink to="/">
       Home page
     </NuxtLink>
+
+    <div class="mx-auto">
+      <v-btn
+        class="p-2"
+        color="accent"
+        nuxt
+        to="/login"
+      >
+        Login
+      </v-btn>
+    </div>
+
   </v-app>
 </template>
 
 <script>
 export default {
-  layout: 'empty',
+  layout: 'solo-page',
   props: {
     error: {
       type: Object,
+      message: null,
       default: null
     }
   },
   data () {
     return {
       pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
+      otherError: 'An error occurred',
+      message: ''
     }
   },
   head () {
-    const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
+    const title = this.error.statusCode === 404 ? 
+      this.pageNotFound : this.otherError
+    this.message = this.error.message; 
     return {
       title
     }

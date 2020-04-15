@@ -58,6 +58,7 @@
   import axios from 'axios';
 
   export default {
+    middleware: 'auth-adm',
     data () {
       return {
         page: 1,

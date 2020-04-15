@@ -19,13 +19,13 @@
               dark
               flat
             >
-              <v-toolbar-title>Login form</v-toolbar-title>
+              <v-toolbar-title>Login</v-toolbar-title>
               <v-spacer />
 
               <v-tooltip right>
                 <template v-slot:activator="{ on }">
                   <nuxt-link
-                    to="/inspire"
+                    to="/"
                     v-on="on"
                   >
                     <v-icon>mdi-close-circle</v-icon>
@@ -35,31 +35,59 @@
               </v-tooltip>
             </v-toolbar>
 
-            <v-card-text>
-              <v-form>
-                <v-text-field
-                  label="Login"
-                  name="login"
-                  prepend-icon="mdi-person"
-                  type="text"
-                />
+            <v-form @submit.prevent="login">
+              <v-card-text>
+                
+                  <v-text-field
+                    label="Login"
+                    name="login"
+                    prepend-icon="mdi-person"
+                    type="text"
+                    v-model="username"
+                  />
 
-                <v-text-field
-                  id="password"
-                  label="Password"
-                  name="password"
-                  prepend-icon="mdi-lock"
-                  type="password"
-                />
-              </v-form>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn color="primary">Login</v-btn>
-            </v-card-actions>
+                  <v-text-field
+                    label="Password"
+                    name="password"
+                    prepend-icon="mdi-lock"
+                    type="password"
+                    v-model="password"
+                  />
+                
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer />
+                <v-btn type="submit" color="primary">Login</v-btn>
+              </v-card-actions>
+            </v-form>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
   </v-content>
 </template>
+
+<script>
+import defaultVue from '../../layouts/default.vue';
+export default {
+  data() {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    async login () {
+      await this.$store.dispatch('login', {
+        username: this.username,
+        password: this.password
+      });
+
+      this.username = '';
+      this.password = '';
+      
+      this.$router.push('/');
+    }
+  }
+}
+</script>

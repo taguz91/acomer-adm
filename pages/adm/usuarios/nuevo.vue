@@ -8,6 +8,7 @@
 import FormUsuario from '~/components/forms/FormUsuario.vue';
 
 export default {
+    middleware: 'auth-adm',
     components: {
         FormUsuario
     }

@@ -16,6 +16,7 @@
 import FormCliente from '~/components/forms/FormCliente.vue';
 
 export default {
+  middleware: 'auth-adm',
   components: {
     FormCliente
   }

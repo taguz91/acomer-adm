@@ -13,6 +13,7 @@ outlined>
 import FormCliente from '~/components/forms/FormRestaurante.vue';
 
 export default {
+  middleware: 'auth-adm',
   components: {
     FormCliente
   }

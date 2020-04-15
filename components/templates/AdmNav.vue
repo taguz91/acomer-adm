@@ -68,8 +68,12 @@
           >{{ title }}</span>
       </v-toolbar-title>
       <v-spacer />
+
+      <span class="white--text">{{ authUser }}</span>
+      
       <v-btn
         icon
+        @click="logout"
       >
         <v-icon
           color="white"
@@ -97,6 +101,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   data () {
     return {
@@ -251,6 +257,15 @@ export default {
       right: true,
       title: 'Acomer - Administracion'
     }
-  }
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('logout');
+      this.$router.push('/');
+    }
+  },
+  computed: mapState([
+    'authUser'
+  ]),
 }
 </script>

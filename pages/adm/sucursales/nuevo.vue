@@ -11,8 +11,8 @@
 <script>
 import FormSucursal from '~/components/forms/FormSucursal.vue';
 
-export default{
-
+export default {
+    middleware: 'auth-adm',
     components: {
         FormSucursal
     }

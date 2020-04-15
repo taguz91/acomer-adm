@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <login v-if="false"/>
+    <login v-if="!$store.state.authUser"/>
     <adm-nav v-else/>
   </v-app>
 </template>
