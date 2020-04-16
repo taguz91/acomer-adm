@@ -1,29 +1,66 @@
 <template>
   <v-app>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-
-    <h2>
-      {{ message }}
-    </h2>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
-
-    <div class="mx-auto">
-      <v-btn
-        class="p-2"
-        color="accent"
-        nuxt
-        to="/login"
+    
+    <v-container
+      class="fill-height"
+      fluid
+    >
+      <v-row
+        align="center"
+        justify="center"
       >
-        Login
-      </v-btn>
-    </div>
+
+        <v-col
+          cols="12"
+          sm="10"
+          md="6"
+        >
+
+          <h1 v-if="error.statusCode === 404">
+            {{ pageNotFound }}
+          </h1>
+          <h1 v-else>
+            {{ otherError }}
+          </h1>
+
+
+          <div class="mx-auto my-3">
+            <v-btn
+              class="p-2"
+              color="accent"
+              nuxt
+              to="/"
+            >
+              Regresar al inicio
+            </v-btn>
+          </div>
+
+          <v-alert
+            icon="mdi-silverware-clean"
+            border="left"
+            type="info"
+            dismissible
+          >
+            <span v-html="message"></span>
+          </v-alert>
+
+          <div class="mx-auto">
+            <v-spacer/>
+            <v-btn
+              class="p-2"
+              color="accent"
+              nuxt
+              to="/login"
+            >
+              Login
+            </v-btn>
+          </div>
+
+        </v-col>
+
+      </v-row>
+
+    </v-container>
 
   </v-app>
 </template>
@@ -40,8 +77,8 @@ export default {
   },
   data () {
     return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred',
+      pageNotFound: '404 Pagina no encontrada!',
+      otherError: 'Error',
       message: ''
     }
   },
