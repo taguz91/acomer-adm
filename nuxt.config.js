@@ -31,7 +31,10 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    
   ],
+  router: {         // middleware all pages of the application
+  },
   /*
   ** Nuxt.js dev-modules
   */
@@ -88,4 +91,5 @@ export default {
     extend (config, ctx) {
     }
   }
+
 }
