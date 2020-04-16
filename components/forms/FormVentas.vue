@@ -1,7 +1,10 @@
 <template>
 
   <v-form>
-      <v-card>
+      <v-card
+      class="mx-auto"
+      outlined
+      >
     <v-card-title class="hideline">Formulario Ventas</v-card-title>
 
     <v-container>

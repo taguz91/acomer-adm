@@ -5,38 +5,33 @@
       class="mx-auto"
       outlined
       >
-    <v-card-title class="hideline">Formulario Usuario</v-card-title>
+    <v-card-title class="hideline">Formulario Plato</v-card-title>
 
     <v-container>
       <v-row>
         <v-col
           cols="12"
-          md="4"
+          md="6"
         >
           <v-text-field
-            v-model="nombre"
+            v-model="nombrePlato"
             :rules="nameRules"
-            :counter="10"
-            label="Nombre"
+            :counter="20"
+            label="Nombre Plato"
             required
           ></v-text-field>
         </v-col>
       </v-row>
 
     <v-row>
-        <v-col
-          cols="12"
-          md="6"
-        >
-          <v-text-field
-            v-model="clave"
-            :rules="nameRules"
-            :counter="10"
-            label="Contraseña"
-            required
-          ></v-text-field>
-        </v-col>
+      <v-col cols="12" md="4">
+        <v-text-field
+          label="Precio"
+          prefix="$"
+        ></v-text-field>
+      </v-col>
     </v-row>
+
 
     <v-row>
         <v-col
@@ -44,10 +39,10 @@
           md="6"
         >
           <v-text-field
-            v-model="clave"
+            v-model="ingredientes"
             :rules="nameRules"
             :counter="10"
-            label="Confirmar Contraseña"
+            label="Ingredientes"
             required
           ></v-text-field>
         </v-col>
@@ -55,15 +50,22 @@
 
     <v-row>
         <v-col
-          cols="12"
-          md="6"
+            cols="12"
+            md="2"
         >
-          <v-text-field
-            v-model="correo"
-            :rules="emailRules"
-            label="Correo"
-            required
-          ></v-text-field>
+            <v-btn
+                color="accent"
+            >Guardar
+            </v-btn>
+        </v-col>
+
+        <v-col
+            cols="12"
+            md="2"
+        >
+            <v-btn
+                color="error"
+            >Cancelar</v-btn>
         </v-col>
     </v-row>
       
