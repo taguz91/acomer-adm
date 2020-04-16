@@ -1,6 +1,9 @@
 <template>
   <v-form>
-    <v-card>
+    <v-card
+    class="mx-auto"
+    outlined
+    >
     <v-card-title class="hideline">Formulario Empleado</v-card-title>
     <v-container>
       <v-row>
