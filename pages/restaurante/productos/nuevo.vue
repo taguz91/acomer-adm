@@ -16,6 +16,8 @@ outlined>
 import FormCliente from '~/components/forms/FormProductos.vue';
 
 export default {
+  middleware: 'auth-res',
+  layout: 'menu-rest',
   components: {
     FormCliente
   }

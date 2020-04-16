@@ -15,6 +15,8 @@ outlined>
 import FormCliente from '~/components/forms/FormMenuDia.vue';
 
 export default {
+  middleware: 'auth-res',
+  layout: 'menu-rest',
   components: {
     FormCliente
   }

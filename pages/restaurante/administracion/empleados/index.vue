@@ -58,6 +58,7 @@
   import axios from 'axios';
 
   export default {
+    middleware: 'auth-res',
     layout: 'menu-rest',
     data () {
       return {

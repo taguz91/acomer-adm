@@ -9,6 +9,7 @@
 import FormMenu from '~/components/forms/FormMenu.vue';
 
 export default {
+  middleware: 'auth-res',
   layout: 'menu-rest',
   components: {
     FormMenu
