@@ -78,6 +78,7 @@
         items: [],
       }
     },
+
     asyncData({$axios, params, error}) {
       return axios.get($axios.defaults.baseURL +'api/v1/plato')
       .then((res) => {

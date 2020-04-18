@@ -2,21 +2,20 @@
 
     <v-container>
 
-        <form-plato></form-plato>
+        <form-ventas></form-ventas>
 
     </v-container>
 
 </template>
 
 <script>
-
-import FormPlato from '~/components/forms/FormPlato.vue';
+import FormVentas from '~/components/forms/FormVentas.vue';
 
 export default {
     middleware: 'auth-res',
     layout: 'menu-rest',
     components: {
-        FormPlato
+        FormVentas
     }
 }
 </script>

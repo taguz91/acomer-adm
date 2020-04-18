@@ -2,7 +2,7 @@
 
     <v-container>
 
-        <form-plato></form-plato>
+        <form-sucursal></form-sucursal>
 
     </v-container>
 
@@ -10,13 +10,13 @@
 
 <script>
 
-import FormPlato from '~/components/forms/FormPlato.vue';
+import FormSucursal from "~/components/forms/FormSucursal.vue";
 
 export default {
     middleware: 'auth-res',
     layout: 'menu-rest',
     components: {
-        FormPlato
+        FormSucursal
     }
 }
 </script>

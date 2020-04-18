@@ -50,6 +50,19 @@
         </v-col>
       </v-row>
 
+  <v-row>
+   <v-col
+   cols="4"
+   >
+      <template>
+        <v-file-input
+          label="Subir imagen"
+          filled
+          prepend-icon="mdi-camera"
+        ></v-file-input>
+      </template>
+    </v-col>
+  </v-row>
       <v-row>
             <v-col
             cols="12"
