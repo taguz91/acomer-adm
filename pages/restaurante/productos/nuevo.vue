@@ -13,7 +13,7 @@ outlined>
 
 <script>
 
-import FormCliente from '~/components/forms/FormProductos.vue';
+import FormCliente from '~/components/forms/FormCliente.vue';
 
 export default {
   middleware: 'auth-res',
