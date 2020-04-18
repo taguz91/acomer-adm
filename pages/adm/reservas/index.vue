@@ -107,7 +107,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get(this.$axios.defaults.baseURL + 'api/v1/reserva/ ' + store.state.idRestaurante + '?page=' + page)
+          axios.get(this.$axios.defaults.baseURL + 'api/v1/reserva?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {
