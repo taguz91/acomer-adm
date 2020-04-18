@@ -1,6 +1,7 @@
 export const state = () => ({
   authUser: null,
-  userType: null
+  userType: null,
+  idRestaurante: 1,
 });
 
 export const mutations = {

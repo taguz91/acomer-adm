@@ -54,7 +54,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    // baseURL: 'http://localhost:8000/api/'
+    baseURL: 'http://acomer-api.us-east-1.elasticbeanstalk.com/'
   },
   /*
   ** vuetify module configuration
