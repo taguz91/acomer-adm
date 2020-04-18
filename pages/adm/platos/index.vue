@@ -78,7 +78,8 @@
         items: [],
       }
     },
-    asyncData({$axios, store, params, error}) {
+
+    asyncData({$axios, params, error}) {
       return axios.get($axios.defaults.baseURL +'api/v1/plato')
       .then((res) => {
         let data = res.data;
@@ -97,7 +98,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get('http://localhost:8000/api/v1/plato?page=' + page)
+          axios.get($axios.defaults.baseURL +'api/v1/plato?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {

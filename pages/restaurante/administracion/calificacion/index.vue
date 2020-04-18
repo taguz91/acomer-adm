@@ -78,9 +78,12 @@
         items: [],
       }
     },
-    asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/calificacion/restaurante/8')
-      .then((res) => {
+    asyncData({$axios, store, params, error}) {
+      return axios.get(
+        $axios.defaults.baseURL 
+        + 'api/v1/calificacion/restaurante/'
+        + store.state.idRestaurante
+      ).then((res) => {
         let data = res.data;
         if (data.status < 400) {
           return {
@@ -97,8 +100,12 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get('http://localhost:8000/api/v1/reporte/calificacion/8?page=' + page)
-          .then((res) => {
+          axios.get(
+            this.$axios.defaults.baseURL + 
+            'http://localhost:8000/api/v1/reporte/calificacion/'+
+            this.$store.state.idRestaurante
+            +'?page=' + page
+          ).then((res) => {
             let data = res.data;
             if (data.status < 400) {
               this.items = data.data
