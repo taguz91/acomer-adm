@@ -27,6 +27,7 @@
                 <v-text-field
                   v-model="fechaInicio"
                   label="Fecha inicio:"
+                  :rules="rFechaInicio"
                   persistent-hint
                   prepend-icon="mdi-calendar"
                   v-on="on"
@@ -62,6 +63,7 @@
                 <v-text-field
                   v-model="fechaFin"
                   label="Fecha fin:"
+                  :rules="rFechaFin"
                   persistent-hint
                   prepend-icon="mdi-calendar"
                   v-on="on"
@@ -88,8 +90,9 @@
         md="3"
       >
         <v-text-field
+          v-model="precio"
           label="Precio"
-          value="10.00"
+          :rules="rPrecio"
           prefix="$"
           max-width="290px"
           min-width="290px"
@@ -101,8 +104,9 @@
         md="3"
       >
         <v-text-field
+          v-model="descuento"
           label="Descuento"
-          value="10.00"
+          :rules="rDescuento"
           prefix="$"
           max-width="290px"
           min-width="290px"
@@ -117,8 +121,6 @@
         >
           <v-text-field
             v-model="extra"
-            :rules="nameRules"
-            :counter="10"
             label="Extra"
             required
           ></v-text-field>
@@ -131,8 +133,12 @@
             md="2"
         >
             <v-btn
-                color="accent"
-            >Guardar
+              :disabled="!valid"
+              color="success"
+              class="mr-4"
+              @click="validate"
+            >
+              Guardar
             </v-btn>
         </v-col>
 
@@ -150,3 +156,39 @@
     </v-card>
   </v-form>
 </template>
+<script>
+export default {
+  data(){
+    return {
+      fechaInicio: '',
+      fechaFin: '',
+      precio: '',
+      descuento: '',
+      extra: '',
+      rFechaInicio: [
+        v => !!v || 'El campo es obligatorio'
+      ],
+      rFechaFin: [
+        v => !!v || 'El campo es obligatorio'
+      ],
+      rPrecio: [
+        v => !!v || 'El campo es obligatorio',
+        v => /^([0-9,.])*$/.test(v) || 'Solo pueden ser numeros.',
+        v => (v && v.length < 5) || 'El campo no debe tener mas caracteres'
+      ],
+      rDescuento: [
+
+      ]
+    }
+  },
+  methods: {
+    validate(){
+      let valido = this.$refs.form.validate();
+
+      if (valido){
+        console.log('GUARDAMOS EN EL AXIOS');
+      }
+    }
+  }
+}
+</script>

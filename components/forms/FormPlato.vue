@@ -15,9 +15,9 @@
         >
           <v-text-field
             v-model="nombrePlato"
-            :rules="nameRules"
-            :counter="20"
-            label="Nombre Plato"
+            :rules="rNombrePlato"
+            :counter="50"
+            label="Nombre Plato:*"
             required
           ></v-text-field>
         </v-col>
@@ -26,7 +26,9 @@
     <v-row>
       <v-col cols="12" md="4">
         <v-text-field
-          label="Precio"
+          v-model="precio"
+          label="Precio:*"
+          :rules="rPrecio"
           prefix="$"
         ></v-text-field>
       </v-col>
@@ -40,9 +42,8 @@
         >
           <v-text-field
             v-model="ingredientes"
-            :rules="nameRules"
-            :counter="10"
-            label="Ingredientes"
+            :rules="rIngredientes"
+            label="Ingredientes:*"
             required
           ></v-text-field>
         </v-col>
@@ -54,7 +55,7 @@
    >
       <template>
         <v-file-input
-          label="Subir imagen"
+          label="Subir imagen:"
           filled
           prepend-icon="mdi-camera"
         ></v-file-input>
@@ -67,12 +68,16 @@
             cols="12"
             md="2"
         >
-            <v-btn
-                color="accent"
-            >Guardar
-            </v-btn>
+        <v-btn
+            :disabled="!valido"
+            color="success"
+            class="mr-4"
+            @click="validate"
+          >
+            Guardar
+          </v-btn>
+            
         </v-col>
-
         <v-col
             cols="12"
             md="2"
@@ -87,3 +92,26 @@
     </v-card>
   </v-form>
 </template>
+<script>
+export default {
+  data(){
+    return{
+      nombrePlato: '',
+      precio: '',
+      ingredientes: '',
+      rNombrePlato: [
+        v => !!v || 'El campo es obligatorio',
+        v => (v && v.length >= 50) || 'El campo no debe tener mas caracteres'
+      ],
+      rPrecio: [
+        v => !!v || 'El campo es obligatorio',
+        v => /^([0-9,.])*$/.test(v) || 'Solo pueden ser numeros.',
+        v => (v && v.length < 5) || 'El campo no debe tener mas caracteres'
+      ],
+      rIngredientes: [
+
+      ]
+    }
+  }
+}
+</script>

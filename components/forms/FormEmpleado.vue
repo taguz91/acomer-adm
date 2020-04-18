@@ -13,9 +13,9 @@
         >
           <v-text-field
             v-model="identificacion"
-            :rules="nameRules"
+            :rules="rIdentificacion"
             :counter="10"
-            label="Identificación"
+            label="Identificación:*"
             required
           ></v-text-field>
         </v-col>
@@ -28,9 +28,9 @@
         >
           <v-text-field
             v-model="nombre"
-            :rules="nameRules"
-            :counter="10"
-            label="Nombre"
+            :rules="rNombre"
+            :counter="50"
+            label="Nombre:*"
             required
           ></v-text-field>
         </v-col>
@@ -43,8 +43,9 @@
         >
           <v-text-field
             v-model="apellido"
-            :rules="emailRules"
-            label="Apellido"
+            :rules="rApellido"
+            :counter="50"
+            label="Apellido:*"
             required
           ></v-text-field>
         </v-col>
@@ -56,6 +57,7 @@
    >
       <template>
         <v-file-input
+          v-model="imagen"
           label="Subir imagen"
           filled
           prepend-icon="mdi-camera"
@@ -64,22 +66,26 @@
     </v-col>
   </v-row>
       <v-row>
-            <v-col
-            cols="12"
-            md="2"
-            >
+        <v-col
+        cols="12"
+        md="2"
+        >
             <v-btn
-            color="accent"
-            >Guardar
+              :disabled="!valid"
+              color="success"
+              class="mr-4"
+              @click="validate"
+            >
+              Guardar
             </v-btn>
-            </v-col>
+        </v-col>
 
             <v-col
-            cols="12"
-            md="2"
+              cols="12"
+              md="2"
             >
             <v-btn
-            color="error"
+              color="error"
             >Cancelar</v-btn>
             </v-col>
         </v-row>
@@ -90,6 +96,38 @@
 </template>
 
 <script>
+export default {
+  data(){
+    return{
+      identificacion: '',
+      nombre: '',
+      apellido: '',
+      imagen: '',
+      rIdentificacion: [
+        v => !!v || 'La identificación es requerida',
+        v => (v && v.length == 10) || 'Debe contener 10 caracteres'
+        //v => /^([0-9])*$/.test(v) || 'Solo pueden ser numeros.'
+      ],
+      rNombre: [
+        v => !!v || 'El nombre es requerido',
+        v => (v && v.length <= 50) || 'No puede tener mas de 50 caracteres',
+        v => /^([A-Z a-z])*$/.test(v) || 'Solo pueden ser letras.'
+      ],
+      rApellido: [
+        v => !!v || 'El apellido es requerido',
+        v => (v && v.length <= 50) || 'No puede tener mas de 50 caracteres',
+        v => /^([A-Z a-z])*$/.test(v) || 'Solo pueden ser letras.'
+      ]
+    }
+  },
+  methods: {
+    validate(){
+      let valido = this.$refs.form.validate();
 
-
-</script>
+      if(valido){
+        console.log('GUARDAMOS EN EL AXIOS');
+      }
+    },
+  },
+}
+</script>>

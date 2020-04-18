@@ -45,7 +45,7 @@
         ></v-time-picker>
       </v-menu>
     </v-col>
-          </v-col>
+          
         </v-row>
         <v-checkbox label="Martes"></v-checkbox>
         <v-checkbox label="Miercoles"></v-checkbox>
@@ -60,9 +60,9 @@
         >
           <v-text-field
             v-model="numero"
-            :rules="nameRules"
-            :counter="10"
-            label="Sucursal #"
+            :rules="rNumero"
+            :counter="3"
+            label="Sucursal #:*"
             required
           ></v-text-field>
         </v-col>
@@ -75,9 +75,9 @@
         >
           <v-text-field
             v-model="direccion"
-            :rules="nameRules"
-            :counter="10"
-            label="Dirección"
+            :rules="rDireccion"
+            :counter="50"
+            label="Dirección:*"
             required
           ></v-text-field>
         </v-col>
@@ -85,13 +85,17 @@
 
       <v-row>
             <v-col
-            cols="12"
-            md="2"
+              cols="12"
+              md="2"
             >
-            <v-btn
-            color="accent"
-            >Guardar
-            </v-btn>
+              <v-btn
+                :disabled="!valido"
+                color="success"
+                class="mr-4"
+                @click="validate"
+              >
+                Guardar
+              </v-btn>
             </v-col>
 
             <v-col
@@ -110,6 +114,29 @@
 </template>
 
 <script>
+export default {
+  data(){
+    return {
+      numero: '',
+      direccion: '',
+      rNumero: [
+        v => !!v || 'El campo es obligatorio',
+        v => (v && v.length <=3) || 'El campo no debe tener mas caracteres'
+      ],
+      rDireccion: [
+        v => !!v || 'El campo es obligatorio',
+        v => (v && v.length <= 50) || 'El campo no debe tener mas caracteres'
+      ]
+    }
+  },
+  methods: {
+    validate(){
+      let valido = this.$refs.form.validate();
 
-
+      if(valido){
+        console.log('GUARDAMOS EN EL AXIOS');
+      }
+    }
+  }
+}
 </script>
