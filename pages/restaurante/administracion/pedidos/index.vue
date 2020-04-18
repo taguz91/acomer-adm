@@ -98,9 +98,9 @@
         if (this.lastLoad != page) {
           this.loading = true;
           axios.get(
-            $axios.defaults.baseURL + 
+            this.$axios.defaults.baseURL + 
             'api/v1/pedido/restaurante/'
-            + store.state.idRestaurante
+            + this.$store.state.idRestaurante
             + '?page=' + page
           ).then((res) => {
             let data = res.data;
