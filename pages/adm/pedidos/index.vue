@@ -79,8 +79,8 @@
         items: [],
       }
     },
-    asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/pedido')
+    asyncData({$axios, params, error}) {
+      return axios.get($axios.defaults.baseURL +'api/v1/pedido')
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
@@ -98,7 +98,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get('http://localhost:8000/api/v1/pedido?page=' + page)
+          axios.get($axios.defaults.baseURL +'v1/pedido?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {
