@@ -78,7 +78,7 @@
         items: [],
       }
     },
-    asyncData($axios, {params, error}) {
+    asyncData({$axios, params, error}) {
       return axios.get($axios.defaults.baseURL +'api/v1/menudia')
       .then((res) => {
         let data = res.data;
@@ -97,7 +97,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get($axios.defaults.baseURL +'api/v1/menudia?page=' + page)
+          axios.get(this.$axios.defaults.baseURL +'api/v1/menudia?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {

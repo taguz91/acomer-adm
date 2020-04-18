@@ -97,7 +97,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get($axios.defaults.baseURL + 'v1/combo?page=' + page)
+          axios.get(this.$axios.defaults.baseURL + 'v1/combo?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {

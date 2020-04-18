@@ -98,11 +98,11 @@
         if (this.lastLoad != page) {
           this.loading = true;
           axios.get(
-            this.$axios.defaults.baseURL + 
-            'api/v1/producto/restaurante/'+
-            this.$store.state.idRestaurante
-            +'?page=' + page
-          ).then((res) => {
+            this.$axios.defaults.baseURL
+             + 'api/v1/producto/restaurante/'
+             + this.$store.state.idRestaurante
+            + '?page=' + page)
+            .then((res) => {
             let data = res.data;
             if (data.status < 400) {
               this.items = data.data

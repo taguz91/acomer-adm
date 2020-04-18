@@ -216,6 +216,7 @@ export default {
               title: 'Ventas',
               to: '/restaurante/administracion/ventas'
             },
+            
           ]
         }
       ],
