@@ -78,8 +78,8 @@
         items: [],
       }
     },
-    asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/plato')
+    asyncData({$axios, store, params, error}) {
+      return axios.get($axios.defaults.baseURL +'api/v1/plato')
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
