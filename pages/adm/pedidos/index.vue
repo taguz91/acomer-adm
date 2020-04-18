@@ -64,10 +64,10 @@
         sortDesc: false,
         loading: false,
         headers: [
-          { text: 'PLATOS ', value: 'platos' },
+          { text: 'Platos ', value: 'platos' },
           { text: 'Notas ', value: 'notas', },
           { text: 'Numero Pedido', value: 'numero' },
-          { text: 'Identificacion Empleado', value: 'numero' },
+          { text: 'Identificacion', value: 'identificacion' },
           { text: 'Nombre Empleado', value: 'nombre' },
           { 
             text: 'Acciones', 
@@ -98,7 +98,7 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get($axios.defaults.baseURL +'v1/pedido?page=' + page)
+          axios.get(this.$axios.defaults.baseURL +'api/v1/pedido?page=' + page)
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {
