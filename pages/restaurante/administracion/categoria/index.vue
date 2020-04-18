@@ -78,8 +78,8 @@
         items: [],
       }
     },
-    asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/categoria/restaurante/8')
+    asyncData({$axios, store, params, error}) {
+      return axios.get($axios.defaults.baseURL + 'api/v1/categoria/restaurante/' + store.state.idRestaurante)
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
@@ -97,8 +97,11 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get('http://localhost:8000/api/v1/categoria/restaurante/8?page=' + page)
-          .then((res) => {
+          axios.get( 
+            this.$axios.defaults.baseURL + 'api/v1/categoria/restaurante/'+
+            this.$store.state.idRestaurante
+            +'?page=' + page
+          ).then((res) => {
             let data = res.data;
             if (data.status < 400) {
               this.items = data.data
