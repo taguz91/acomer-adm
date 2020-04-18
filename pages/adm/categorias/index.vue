@@ -97,7 +97,7 @@
         if (this.lastLoad != page) {
           this.loading = true;
           axios.get(
-            $axios.defaults.baseURL +
+            this.$axios.defaults.baseURL +
             'api/v1/categoria?page=' + page)
           .then((res) => {
             let data = res.data;
