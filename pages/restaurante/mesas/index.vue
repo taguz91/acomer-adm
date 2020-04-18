@@ -78,7 +78,7 @@
         items: [],
       }
     },
-    asyncData({$axios, params, error}) {
+    asyncData({$axios, store, params, error}) {
       return axios.get($axios.defaults.baseURL +'api/v1/mesa/restaurante/'+ store.state.idRestaurante)
       .then((res) => {
         let data = res.data;
