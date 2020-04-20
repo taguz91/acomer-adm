@@ -3,6 +3,18 @@
 
     <h1 class="mt-2 mb-3">Restaurantes</h1>
 
+    <v-row
+      class="mx-3 my-2"
+    >
+      <v-spacer/>
+      <v-btn
+        color="success"
+        to="/adm/restaurantes/nuevo"
+      >
+        Nuevo
+      </v-btn>
+    </v-row>
+
     <v-data-table
       :headers="headers"
       :items="items"
