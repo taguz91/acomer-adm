@@ -1,5 +1,9 @@
 <template>
-  <v-form>
+  <v-form ref="form"
+    v-model="valid"
+    lazy-validation>
+     <v-card-title class="headline">Formulario Producto:</v-card-title>
+    
     <v-container>
 <!--Inicio ==============================================-->
       <v-row>
@@ -36,7 +40,8 @@
             v-model="nombre"
             :counter="20"
             label="Nombre:"
-            required
+            required,
+            :rules="rNombre"
           >
 
           </v-text-field>
@@ -75,6 +80,7 @@
             :counter="20"
             label="Stock:"
             required
+            :rules="rStock"
           >
 
           </v-text-field>
@@ -109,6 +115,7 @@
             :counter="20"
             label="url_imagen:"
             required
+            :rules="rUrl"
           >
 
           </v-text-field>
@@ -146,6 +153,7 @@
             :counter="20"
             label="precio:"
             required
+            :rules="rPrecio"
           >
 
           </v-text-field>
@@ -220,17 +228,38 @@
 export default {
   data() {
     return {
+        valid:true,
         nombre:'',
+        rNombre:[
+        v => !!v || 'Nombre es requerido.',
+        v => (v && v.length <= 20) || 'No debe contener mas de 20 caracteres.'
+      ],
         stock:'',
+        rStock:[
+        v => !!v || 'Precio es requerido.',
+        v => /^([0-9])*$/.test(v) || 'Solo pueden ser numeros.'
+      ],
         url_imagen:'',
-        precio:''
+        rUrl:[
+          v => !!v || 'Url invalidad digite nuevamente',
+          v => /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(v) || 'No es una url'
+        ],
+        precio:'',
+        rPrecio:[
+        v => !!v || 'Precio es requerido.',
+        v => /^([0-9])*$/.test(v) || 'Solo pueden ser numeros.'
+      ]
     }
   },
 
   methods: {
-    guardar() {
-      // GUARDAR EN EL BACKEND 
-    }
+    validate () {
+      let valido = this.$refs.form.validate();
+
+      if (valido) {
+        console.log('GUARDAMOS EN EL AXIOSSS!!');
+      }
+    },
   },
 }
 </script>

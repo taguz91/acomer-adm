@@ -1,5 +1,10 @@
 <template>
-  <v-form>
+  <v-form
+   ref="form"
+    v-model="valid"
+    lazy-validation>
+    <v-card-title class="headline">Formulario Mesa:</v-card-title>
+   
     <v-container>
 <!--Inicio ==============================================-->
       <v-row>
@@ -34,6 +39,7 @@
             :counter="20"
             label="Descripcion:"
             required
+            :rules="rDescripcion"
           >
 
           </v-text-field>
@@ -70,6 +76,7 @@
             :counter="20"
             label="Precio:"
             required
+            :rules="rPrecio"
           >
 
           </v-text-field>
@@ -110,7 +117,7 @@
           md="4"
         >
 
-<v-menu
+<!-- <v-menu
         ref="menu"
         v-model="menu"
         :close-on-content-click="false"
@@ -136,7 +143,7 @@
           <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
           <v-btn text color="primary" @click="$refs.menu.save(dates)">OK</v-btn>
         </v-date-picker>
-      </v-menu>
+      </v-menu> -->
 
         </v-col>
 
@@ -170,14 +177,20 @@
 
           <div class="my-2">
 
-        <v-btn  color="accent">Registrar</v-btn>
+        <v-btn  :disabled="!valid"
+        class="mr-4"
+        @click="validate"
+        color="accent">Registrar</v-btn>
         
       </div>
 <!--Button-->
 
   <!--Button-->
           <div class="my-2">
-        <v-btn  color="error">Cancelar</v-btn>
+        <v-btn   color="error"
+        :disabled="!valid"
+        class="mr-4"
+        @click="validate">Cancelar</v-btn>
       </div>
 <!--Button-->
         </v-col>
@@ -207,15 +220,30 @@
 export default {
   data() {
     return {
+      valid:true,
+      menu:'',
+      dates:'',
       descripcion: '',
-      precio:''
+      rDescripcion: [
+        v => !!v || 'Descripcion es requerido.',
+        v => (v && v.length <= 20) || 'No debe contener mas de 20 caracteres.'
+      ],
+      precio:'',
+      rPrecio: [
+        v => !!v || 'Telefono es requerido.',
+        v => /^([0-9])*$/.test(v) || 'Solo pueden ser numeros.'
+      ]
     }
   },
 
   methods: {
-    guardar() {
-      // GUARDAR EN EL BACKEND 
-    }
+     validate () {
+      let valido = this.$refs.form.validate();
+
+      if (valido) {
+        console.log('GUARDAMOS EN EL AXIOSSS!!');
+      }
+    },
   },
 }
 </script>

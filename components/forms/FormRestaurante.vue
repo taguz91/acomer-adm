@@ -1,6 +1,11 @@
 <template>
-  <v-form>
+  <v-form ref="form"
+    v-model="valid"
+    lazy-validation>
+     <v-card-title class="headline">Formulario Restaurante:</v-card-title>
+    
     <v-container>
+
 <!--Inicio ==============================================-->
       <v-row>
         <v-col
@@ -8,7 +13,7 @@
           md=""
         >
 
-        <h1 class="text-center">Formulario Restaurante</h1>
+        
 
         </v-col>
       </v-row>
@@ -32,8 +37,9 @@
           <v-text-field
             v-model="nombre"
             :counter="20"
-            label="Nombre Comercial:"
+            label="Nombre Comercial:*"
             required
+            :rules="rNombre"
           >
 
           </v-text-field>
@@ -66,10 +72,11 @@
         >
 
           <v-text-field
-            v-model="nombre"
+            v-model="nombreFiscal"
             :counter="20"
-            label="Nombre Fiscal:"
+            label="Nombre Fiscal:*"
             required
+            :rules="rNombreFiscal"
           >
 
           </v-text-field>
@@ -143,14 +150,28 @@
 export default {
   data() {
     return {
-      nombre: ''
+      valid:true,
+      nombre: '',
+      rNombre: [
+        v => !!v || 'Nombre Restaurante es requerido.',
+        v => (v && v.length <= 20) || 'No debe contener mas de 20 caracteres.'
+      ],
+      nombreFiscal:'',
+      rNombreFiscal: [
+        v => !!v || 'Nombre Fiscal es requerido.',
+        v => (v && v.length <= 20) || 'No debe contener mas de 20 caracteres.'
+      ],
     }
   },
 
   methods: {
-    guardar() {
-      // GUARDAR EN EL BACKEND 
-    }
+    validate () {
+      let valido = this.$refs.form.validate();
+
+      if (valido) {
+        console.log('GUARDAMOS EN EL AXIOSSS!!');
+      }
+    },
   },
 }
 </script>

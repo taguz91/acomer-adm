@@ -1,5 +1,9 @@
 <template>
-  <v-form>
+  <v-form  
+  ref="form"
+    v-model="valid"
+    lazy-validation>
+     <v-card-title class="headline">Formulario Mesa:</v-card-title>
     <v-container>
 <!--Inicio ==============================================-->
       <v-row>
@@ -7,8 +11,6 @@
           cols="12"
           md=""
         >
-
-        <h1 class="text-center">Formulario Mesa</h1>
 
         </v-col>
       </v-row>
@@ -35,8 +37,9 @@
           <v-text-field
             v-model="numero"
             :counter="20"
-            label="Numero:"
+            label="Numero:*"
             required
+            :rules="rNumero"
           >
 
           </v-text-field>
@@ -73,8 +76,9 @@
        <v-text-field
             v-model="capacidad"
             :counter="20"
-            label="Capacidad:"
+            label="Capacidad:*"
             required
+            :rules="rCapacidad"
           >
 
           </v-text-field>
@@ -107,8 +111,9 @@
  <v-text-field
             v-model="descripcion"
             :counter="20"
-            label="Descripcion:"
+            label="Descripcion:*"
             required
+            :rules="rDescripcion"
           >
 
           </v-text-field>
@@ -146,14 +151,22 @@
 
           <div class="my-2">
 
-        <v-btn  color="accent">Registrar</v-btn>
+        <v-btn  
+        :disabled="!valid"
+        class="mr-4"
+        @click="validate"
+        color="accent">Registrar</v-btn>
         
       </div>
 <!--Button-->
 
   <!--Button-->
           <div class="my-2">
-        <v-btn  color="error">Cancelar</v-btn>
+        <v-btn  color="error"
+        :disabled="!valid"
+        class="mr-4"
+        @click="validate"
+        >Cancelar</v-btn>
       </div>
 <!--Button-->
         </v-col>
@@ -183,16 +196,33 @@
 export default {
   data() {
     return {
+      valid:true,
         numero:'',
+        rNumero:[
+        v => !!v || 'Numero es requerido.',
+        v => /^([0-9])*$/.test(v) || 'Solo pueden ser numeros.'
+      ],
       capacidad: '',
-      descripcion:''
+      rCapacidad:[
+        v => !!v || 'Capacidad es requerida.',
+        v => /^([0-9])*$/.test(v) || 'Solo pueden ser numeros.'
+      ],
+      descripcion:'',
+      rDescripcion: [
+        v => !!v || 'Descripcion es requerida.',
+        v => (v && v.length <= 25) || 'No debe contener mas de 25 caracteres.'
+      ]
     }
   },
 
   methods: {
-    guardar() {
-      // GUARDAR EN EL BACKEND 
-    }
+     validate () {
+      let valido = this.$refs.form.validate();
+
+      if (valido) {
+        console.log('GUARDAMOS EN EL AXIOSSS!!');
+      }
+    },
   },
 }
 </script>

@@ -1,5 +1,10 @@
 <template>
-  <v-form>
+  <v-form
+  ref="form"
+    v-model="valid"
+    lazy-validation>
+    <v-card-title class="headline">Formulario Categoria:</v-card-title>
+   
     <v-container>
 <!--Inicio ==============================================-->
       <v-row>
@@ -8,7 +13,7 @@
           md=""
         >
 
-        <h1 class="text-center">Formulario Categoria</h1>
+        
 
         </v-col>
       </v-row>
@@ -32,8 +37,9 @@
           <v-text-field
             v-model="nombre"
             :counter="20"
-            label="Nombre Categoria:"
+            label="Nombre Categoria:*"
             required
+            :rules="rCategoria"
           >
 
           </v-text-field>
@@ -99,14 +105,21 @@
 
           <div class="my-2">
 
-        <v-btn  color="accent">Registrar</v-btn>
+        <v-btn  :disabled="!valid"
+        class="mr-4"
+        @click="validate"
+        color="accent">Registrar</v-btn>
         
       </div>
 <!--Button-->
 
   <!--Button-->
           <div class="my-2">
-        <v-btn  color="error">Cancelar</v-btn>
+        <v-btn  color="error"
+        :disabled="!valid"
+        class="mr-4"
+        @click="validate"
+        >Cancelar</v-btn>
       </div>
 <!--Button-->
         </v-col>
@@ -136,14 +149,23 @@
 export default {
   data() {
     return {
+      valid:true,
       nombre: '',
+      rCategoria:[
+        v => !!v || 'Nombre Categoria es requerido.',
+        v => (v && v.length <= 20) || 'No debe contener mas de 20 caracteres.'
+      ],
     }
   },
 
   methods: {
-    guardar() {
-      // GUARDAR EN EL BACKEND 
-    }
+     validate () {
+      let valido = this.$refs.form.validate();
+
+      if (valido) {
+        console.log('GUARDAMOS EN EL AXIOSSS!!');
+      }
+    },
   },
 }
 </script>
