@@ -100,13 +100,14 @@ export default {
       precio: '',
       ingredientes: '',
       rNombrePlato: [
-         v => !!v || 'Nombre Categoria es requerido.',
-        v => (v && v.length <= 50) || 'No debe contener mas de 50 caracteres.'
+        v => !!v || 'El campo es obligatorio',
+        v => /^([A-Z a-z])*$/.test(v) || 'Solo pueden ser numeros.',
+        v => (v && v.length <= 50) || 'El campo no debe tener mas caracteres'
       ],
       rPrecio: [
         v => !!v || 'El campo es obligatorio',
         v => /^([0-9,.])*$/.test(v) || 'Solo pueden ser numeros.',
-        v => (v && v.length < 5) || 'El campo no debe tener mas caracteres'
+        v => (v && v.length < 6) || 'El campo no debe tener mas caracteres'
       ],
       rIngredientes: [
    v => !!v || 'Nombre Categoria es requerido.',
