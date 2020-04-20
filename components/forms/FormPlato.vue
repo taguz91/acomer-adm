@@ -1,11 +1,14 @@
 <template>
 
-  <v-form>
+  <v-form
+  ref="form"
+  v-model="valid"
+  lazy-validation>
       <v-card
       class="mx-auto"
       outlined
       >
-    <v-card-title class="hideline">Formulario Plato</v-card-title>
+    <v-card-title class="headline">Formulario Plato</v-card-title>
 
     <v-container>
       <v-row>
@@ -69,7 +72,7 @@
             md="2"
         >
         <v-btn
-            :disabled="!valido"
+            :disabled="!valid"
             color="success"
             class="mr-4"
             @click="validate"
@@ -96,17 +99,19 @@
 export default {
   data(){
     return{
+      valid: true,
       nombrePlato: '',
       precio: '',
       ingredientes: '',
       rNombrePlato: [
         v => !!v || 'El campo es obligatorio',
-        v => (v && v.length >= 50) || 'El campo no debe tener mas caracteres'
+        v => /^([A-Z a-z])*$/.test(v) || 'Solo pueden ser numeros.',
+        v => (v && v.length <= 50) || 'El campo no debe tener mas caracteres'
       ],
       rPrecio: [
         v => !!v || 'El campo es obligatorio',
         v => /^([0-9,.])*$/.test(v) || 'Solo pueden ser numeros.',
-        v => (v && v.length < 5) || 'El campo no debe tener mas caracteres'
+        v => (v && v.length < 6) || 'El campo no debe tener mas caracteres'
       ],
       rIngredientes: [
 

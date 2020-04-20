@@ -1,5 +1,8 @@
 <template>
-  <v-form>
+  <v-form
+  ref="form"
+  v-model="valid"
+  lazy-validation>
     <v-card
     class="mx-auto"
     outlined
@@ -57,7 +60,6 @@
    >
       <template>
         <v-file-input
-          v-model="imagen"
           label="Subir imagen"
           filled
           prepend-icon="mdi-camera"
@@ -99,10 +101,10 @@
 export default {
   data(){
     return{
+      valid: true,
       identificacion: '',
       nombre: '',
       apellido: '',
-      imagen: '',
       rIdentificacion: [
         v => !!v || 'La identificación es requerida',
         v => (v && v.length == 10) || 'Debe contener 10 caracteres'
@@ -130,4 +132,4 @@ export default {
     },
   },
 }
-</script>>
+</script>

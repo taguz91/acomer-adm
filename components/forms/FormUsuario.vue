@@ -1,6 +1,9 @@
 <template>
 
-  <v-form>
+  <v-form
+  ref="form"
+  v-model="valid"
+  lazy-validation>
       <v-card
       class="mx-auto"
       outlined
@@ -68,7 +71,7 @@
     </v-row>
 
     <v-btn
-        :disabled="!valido"
+        :disabled="!valid"
         color="success"
         class="mr-4"
         @click="validate"
