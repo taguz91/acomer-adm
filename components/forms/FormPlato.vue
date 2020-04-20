@@ -1,10 +1,9 @@
 <template>
 
-  <v-form>
-      <v-card
-      class="mx-auto"
-      outlined
-      >
+  <v-form  ref="form"
+    v-model="valid"
+    lazy-validation>
+      
     <v-card-title class="hideline">Formulario Plato</v-card-title>
 
     <v-container>
@@ -69,7 +68,7 @@
             md="2"
         >
         <v-btn
-            :disabled="!valido"
+            :disabled="!valid"
             color="success"
             class="mr-4"
             @click="validate"
@@ -89,19 +88,20 @@
     </v-row>
       
     </v-container>
-    </v-card>
   </v-form>
 </template>
 <script>
+import axios from 'axios';
 export default {
   data(){
     return{
+      valid:true,
       nombrePlato: '',
       precio: '',
       ingredientes: '',
       rNombrePlato: [
-        v => !!v || 'El campo es obligatorio',
-        v => (v && v.length >= 50) || 'El campo no debe tener mas caracteres'
+         v => !!v || 'Nombre Categoria es requerido.',
+        v => (v && v.length <= 50) || 'No debe contener mas de 50 caracteres.'
       ],
       rPrecio: [
         v => !!v || 'El campo es obligatorio',
@@ -109,9 +109,34 @@ export default {
         v => (v && v.length < 5) || 'El campo no debe tener mas caracteres'
       ],
       rIngredientes: [
-
+   v => !!v || 'Nombre Categoria es requerido.',
+        v => (v && v.length <= 50) || 'No debe contener mas de 50 caracteres.'
       ]
     }
-  }
+    },
+
+    methods: {
+     validate () {
+      let valido = this.$refs.form.validate();
+
+      if (valido) {
+        axios.post(this.$axios.defaults.baseURL+'api/v1/plato', {
+                    nombre: this.nombrePlato,
+                    precio: this.precio,
+                    ingredientes: this.ingredientes,
+                    url_image: 'uno'
+                })
+                .then((response)=> {
+                    console.log('objeto guardado',response)
+                })
+                .catch((error) =>{
+                    cconsole.log(error)
+                });
+      }
+    },
+  },
+
+
+  
 }
 </script>
