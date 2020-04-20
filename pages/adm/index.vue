@@ -1,6 +1,6 @@
 <template>
   <div>
-    ADMINISTRACION SUPREMA
+    Estamos en Administracion.
   </div>
 </template>
 

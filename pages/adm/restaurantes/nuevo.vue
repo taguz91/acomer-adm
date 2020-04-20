@@ -3,19 +3,19 @@
 <v-card
 class="mx-auto"
 outlined>
-    <form-cliente></form-cliente>
+    <form-restaurante></form-restaurante>
 </v-card>
   </v-container>
 </template>
 
 
 <script>
-import FormCliente from '~/components/forms/FormRestaurante.vue';
+import FormRestaurante from '~/components/forms/FormRestaurante.vue';
 
 export default {
   middleware: 'auth-adm',
   components: {
-    FormCliente
+    FormRestaurante
   }
 }
 </script>
