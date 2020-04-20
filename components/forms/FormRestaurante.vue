@@ -113,14 +113,20 @@
 
           <div class="my-2">
 
-        <v-btn  color="accent">Registrar</v-btn>
+        <v-btn   :disabled="!valid"
+        class="mr-4"
+        @click="validate"
+        color="accent">Registrar</v-btn>
         
       </div>
 <!--Button-->
 
   <!--Button-->
           <div class="my-2">
-        <v-btn  color="error">Cancelar</v-btn>
+        <v-btn  color="error"
+        :disabled="!valid"
+        class="mr-4"
+        @click="validate">Cancelar</v-btn>
       </div>
 <!--Button-->
         </v-col>
@@ -179,7 +185,7 @@ export default {
                     console.log('objeto guardado',response)
                 })
                 .catch((error) =>{
-                    cconsole.log(error)
+                    console.log(error)
                 });
       }
     },

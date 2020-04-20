@@ -1,10 +1,10 @@
 <template>
 
-  <v-form>
-      <v-card
-      class="mx-auto"
-      outlined
-      >
+  <v-form
+  ref="form"
+    v-model="valid"
+    lazy-validation>
+     
     <v-card-title class="hideline">Formulario Ventas</v-card-title>
 
     <v-container>
@@ -74,9 +74,9 @@
           md="6"
         >
           <v-text-field
-            v-model="correo"
-            :rules="rCorreo"
-            label="Correo:*"
+            v-model="total"
+            :rules="rTotal"
+            label="Total:*"
             required
           ></v-text-field>
         </v-col>
@@ -88,7 +88,7 @@
             md="2"
         >
            <v-btn
-            :disabled="!validO"
+            :disabled="!valid"
             color="success"
             class="mr-4"
             @click="validate"
@@ -108,19 +108,20 @@
     </v-row>
       
     </v-container>
-    </v-card>
   </v-form>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data(){
     return{
+      valid:true,
       identificacion: '',
       nombre: '',
       direccion: '',
       telefono: '',
-      correo: '',
+      total: '',
       rIdentificacion: [
         v => !!v || 'El campo es obligatorio',
         v => (v && v.length == 10) || 'Debe contener 10 caracteres'
@@ -137,10 +138,9 @@ export default {
       rTelefono: [
         v => !!v || 'El campo es obligatorio.',
         v => /^([0-9])*$/.test(v) || 'Solo pueden ser numeros.'
-      ],
-      rCorreo: [
-        v => !!v || 'Correo Electrónico es requerido',
-        v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(v) || 'Correo Electrónico inválido'
+      ],rTotal:[
+        v => !!v || 'Total es requerida.',
+        v => /^([0-9])*$/.test(v) || 'Solo pueden ser numeros.'
       ]
     }
   },
@@ -149,7 +149,23 @@ export default {
       let valido = this.$refs.form.validate();
 
       if(valido){
-        console.log('GUARDAMOS EN EL AXIOS');
+         axios.post(this.$axios.defaults.baseURL+'api/v1/encabezado/factura', {
+                    id_cliente: 1,
+                    id_pedido: 1,
+                    total: 1,
+                    nombre: this.nombre,
+                    direccion: this.direccion,
+                    telefono:this.telefono,
+                    identificacion: this.identificacion,
+                    id_restaurante: this.$store.state.idRestaurante
+                    
+                })
+                .then((response)=> {
+                    console.log('objeto guardado',response)
+                })
+                .catch((error) =>{
+                    console.log(error)
+                });
       }
     }
   }
