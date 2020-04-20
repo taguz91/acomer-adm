@@ -126,7 +126,7 @@ export default {
             {
               icon: 'mdi-account-box',
               title: 'Perfil',
-              to: '/restaurante'
+              to: '/adm'
             },
           ]
         },

@@ -13,6 +13,8 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.9.0",
     "@nuxtjs/axios": "^5.3.6",
+    "chart.js": "^2.9.3",
+    "hchs-vue-charts": "^1.2.8",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
