@@ -78,8 +78,12 @@
         items: [],
       }
     },
-    asyncData({$axios, params, error}) {
-      return axios.get($axios.defaults.baseURL +'api/v1/mesa')
+    asyncData({$axios, store, params, error}) {
+      return axios.get($axios.defaults.baseURL +'api/v1/mesa', {
+        headers: {
+          'X-token': store.state.token
+        }
+      })
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
@@ -97,7 +101,11 @@
       next(page) {
         if (this.lastLoad != page) {
           this.loading = true;
-          axios.get(this.$axios.defaults.baseURL +'api/v1/mesa?page=' + page)
+          axios.get(this.$axios.defaults.baseURL +'api/v1/mesa?page=' + page, {
+            headers: {
+              'X-token': this.$store.state.token
+            }
+          })
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {

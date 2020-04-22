@@ -80,7 +80,11 @@
       }
     },
     asyncData({params, error}) {
-      return axios.get('http://localhost:8000/api/v1/sucursal/restaurante/8')
+      return axios.get('http://localhost:8000/api/v1/sucursal/restaurante/8', {
+        headers: {
+          'X-token': store.state.token
+        }
+      })
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {

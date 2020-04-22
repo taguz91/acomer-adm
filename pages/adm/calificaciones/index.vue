@@ -80,8 +80,12 @@
         items: [],
       }
     },
-    asyncData({$axios, params, error}) {
-      return axios.get($axios.defaults.baseURL +'api/v1/calificacion')
+    asyncData({$axios, store, params, error}) {
+      return axios.get($axios.defaults.baseURL +'api/v1/calificacion', {
+        headers: {
+          'X-token': store.state.token
+        }
+      })
       .then((res) => {
         let data = res.data;
         if (data.status < 400) {
@@ -101,7 +105,11 @@
           this.loading = true;
           axios.get(
             this.$axios.defaults.baseURL + 
-            'api/v1/calificacion?page=' + page)
+            'api/v1/calificacion?page=' + page, {
+            headers: {
+              'X-token': this.$store.state.token
+            }
+          })
           .then((res) => {
             let data = res.data;
             if (data.status < 400) {
