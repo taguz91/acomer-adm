@@ -2,6 +2,7 @@ export const state = () => ({
   authUser: null,
   userType: null,
   idRestaurante: 1,
+  token: '123'
 });
 
 export const mutations = {
