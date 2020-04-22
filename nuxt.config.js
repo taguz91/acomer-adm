@@ -55,8 +55,8 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    // baseURL: 'http://acomer-api.us-east-1.elasticbeanstalk.com/'
-    baseURL: 'http://localhost:8000/',
+    baseURL: 'http://acomer-api.us-east-1.elasticbeanstalk.com/',
+    // baseURL: 'http://localhost:8000/',
     headers: {
       common: {
         'X-token': '123'
