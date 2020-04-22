@@ -1,11 +1,14 @@
 <template>
 
-  <v-form>
+  <v-form
+  ref="form"
+  v-model="valid"
+  lazy-validation>
       <v-card
       class="mx-auto"
       outlined
       >
-    <v-card-title class="hideline">Formulario Promocion</v-card-title>
+    <v-card-title class="headline">Formulario Promocion</v-card-title>
     <v-container>
         <v-row>
         <v-col
@@ -160,6 +163,7 @@
 export default {
   data(){
     return {
+      valid: true,
       fechaInicio: '',
       fechaFin: '',
       precio: '',
@@ -173,11 +177,11 @@ export default {
       ],
       rPrecio: [
         v => !!v || 'El campo es obligatorio',
-        v => /^([0-9,.])*$/.test(v) || 'Solo pueden ser numeros.',
-        v => (v && v.length < 5) || 'El campo no debe tener mas caracteres'
+        v => /^([0-9])*$/.test(v) || 'Solo pueden ser numeros.',
+        //v => (v && v.length < 6) || 'El campo no debe tener mas caracteres'
       ],
       rDescuento: [
-
+        v => /^([0-9])*$/.test(v) || 'Solo pueden ser numeros.'
       ]
     }
   },
@@ -188,7 +192,7 @@ export default {
       if (valido){
         console.log('GUARDAMOS EN EL AXIOS');
       }
-    }
-  }
+    },
+  },
 }
 </script>

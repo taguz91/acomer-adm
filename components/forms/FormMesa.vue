@@ -155,9 +155,13 @@
         :disabled="!valid"
         class="mr-4"
         @click="validate"
+        v-on:click="enviar"
         color="accent">Registrar</v-btn>
         
+
       </div>
+
+        
 <!--Button-->
 
   <!--Button-->
@@ -193,6 +197,7 @@
 
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -220,9 +225,28 @@ export default {
       let valido = this.$refs.form.validate();
 
       if (valido) {
-        console.log('GUARDAMOS EN EL AXIOSSS!!');
+        axios.post(this.$axios.defaults.baseURL+'api/v1/mesa', {
+                    numero: this.numero,
+                    capacidad: this.capacidad,
+                    descripcion: this.descripcion,
+                    id_restaurante: this.$store.state.idRestaurante
+                })
+                .then((response)=> {
+                    console.log('objeto guardado',response)
+                })
+                .catch((error) =>{
+                    cconsole.log(error)
+                });
       }
+
+      
     },
+    enviar() {
+      // `evento` es el evento DOM nativo
+      
+       
+      
+    }, 
   },
 }
 </script>

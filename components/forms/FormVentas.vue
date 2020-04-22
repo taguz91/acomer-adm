@@ -1,11 +1,14 @@
 <template>
 
-  <v-form>
+  <v-form
+  ref="form"
+  v-model="valid"
+  lazy-validation>
       <v-card
       class="mx-auto"
       outlined
       >
-    <v-card-title class="hideline">Formulario Ventas</v-card-title>
+    <v-card-title class="headline">Formulario Ventas</v-card-title>
 
     <v-container>
 
@@ -88,7 +91,7 @@
             md="2"
         >
            <v-btn
-            :disabled="!validO"
+            :disabled="!valid"
             color="success"
             class="mr-4"
             @click="validate"
@@ -116,6 +119,7 @@
 export default {
   data(){
     return{
+      valid: true,
       identificacion: '',
       nombre: '',
       direccion: '',
@@ -140,7 +144,7 @@ export default {
       ],
       rCorreo: [
         v => !!v || 'Correo Electrónico es requerido',
-        v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(v) || 'Correo Electrónico inválido'
+        v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(v) || 'Correo Electrónico inválido'
       ]
     }
   },

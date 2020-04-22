@@ -146,6 +146,7 @@
 
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -163,7 +164,17 @@ export default {
       let valido = this.$refs.form.validate();
 
       if (valido) {
-        console.log('GUARDAMOS EN EL AXIOSSS!!');
+        axios.post(this.$axios.defaults.baseURL+'api/v1/categoria', {
+                    nombre: this.nombre,
+                    numero_platos: 1,
+                    id_restaurante: this.$store.state.idRestaurante
+                })
+                .then((response)=> {
+                    console.log('objeto guardado',response)
+                })
+                .catch((error) =>{
+                    cconsole.log(error)
+                });
       }
     },
   },
