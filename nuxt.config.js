@@ -31,7 +31,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: "@/plugins/chart", ssr: false }
+    { src: "@/plugins/chart", ssr: false },
+    // '~/plugins/axios'
   ],
   router: {         // middleware all pages of the application
   },
@@ -54,7 +55,16 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'http://acomer-api.us-east-1.elasticbeanstalk.com/'
+    baseURL: 'http://acomer-api.us-east-1.elasticbeanstalk.com/',
+    // baseURL: 'http://localhost:8000/',
+    headers: {
+      common: {
+        'X-token': '123'
+      }
+    },
+    common: {
+      'X-token': '123'
+    }
   },
   /*
   ** vuetify module configuration
